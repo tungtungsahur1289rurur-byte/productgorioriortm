@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RTM GORIORIO - Toko Online Eksklusif</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #1a252f;
+            --success: #27ae60;
+            --warning: #f39c12;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .brand-text h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+        
+        .brand-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .auth-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .user-status {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .btn-danger {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        .btn-success {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Welcome Section */
+        .welcome-section {
+            background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.8)), url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            border-radius: 0 0 15px 15px;
+            margin-bottom: 2rem;
+        }
+        
+        .welcome-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .welcome-section p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        /* Main Layout */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        @media (max-width: 992px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Admin Panel */
+        .admin-panel {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-top: 5px solid var(--secondary);
+        }
+        
+        .admin-panel.disabled {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+        
+        .panel-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .panel-header i {
+            font-size: 1.5rem;
+            color: var(--secondary);
+        }
+        
+        .admin-alert {
+            background-color: #e8f4fc;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            border-color: var(--secondary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .form-note {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        
+        /* Products Section */
+        .products-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .products-count {
+            background-color: var(--secondary);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.8rem;
+        }
+        
+        .product-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        .product-category {
+            background-color: #e8f4fc;
+            color: var(--secondary);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .product-description {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+            font-size: 0.85rem;
+            color: #7f8c8d;
+        }
+        
+        .product-stock {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        
+        .stock-high {
+            background-color: #d5f4e6;
+            color: #27ae60;
+        }
+        
+        .stock-low {
+            background-color: #fef9e7;
+            color: #f39c12;
+        }
+        
+        .stock-none {
+            background-color: #fdedec;
+            color: #e74c3c;
+        }
+        
+        .admin-controls {
+            margin-top: 1rem;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 0.85rem;
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            grid-column: 1 / -1;
+        }
+        
+        .empty-state i {
+            font-size: 4rem;
+            color: #ddd;
+            margin-bottom: 1rem;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: slideUp 0.3s ease;
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .modal-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-header i {
+            font-size: 2rem;
+            color: var(--secondary);
+        }
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--success);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.error {
+            background-color: var(--accent);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #34495e;
+            color: #95a5a6;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .brand {
+                justify-content: center;
+            }
+            
+            .welcome-section h2 {
+                font-size: 2rem;
+            }
+            
+            .welcome-section p {
+                font-size: 1rem;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="brand">
+                <div class="logo">RTM</div>
+                <div class="brand-text">
+                    <h1>GORIORIO</h1>
+                    <p>Toko Online Eksklusif</p>
+                </div>
+            </div>
+            
+            <div class="auth-section">
+                <div class="user-status">
+                    <i class="fas fa-user"></i>
+                    <span id="user-status-text">Tamu</span>
+                </div>
+                <button class="btn btn-primary" id="login-btn">
+                    <i class="fas fa-sign-in-alt"></i> Login Admin
+                </button>
+                <button class="btn btn-danger" id="logout-btn" style="display: none;">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Welcome Section -->
+    <section class="welcome-section">
+        <div class="container">
+            <h2>Selamat Datang di RTM GORIORIO</h2>
+            <p>Toko online eksklusif dengan produk berkualitas tinggi. Hanya admin yang dapat mengupload produk, tetapi semua tamu dapat melihat katalog produk kami.</p>
+            <div id="guest-message">
+                <p>Anda sedang login sebagai tamu. Silakan login sebagai admin untuk menambah atau mengelola produk.</p>
+            </div>
+            <div id="admin-message" style="display: none;">
+                <p>Anda login sebagai admin RTM GORIORIO. Anda dapat menambah, mengedit, dan menghapus produk.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-layout">
+            <!-- Admin Panel -->
+            <section class="admin-panel disabled" id="admin-panel">
+                <div class="panel-header">
+                    <i class="fas fa-user-shield"></i>
+                    <h2>Panel Admin RTM GORIORIO</h2>
+                </div>
+                
+                <div class="admin-alert">
+                    <i class="fas fa-crown"></i>
+                    <div>
+                        <strong>Akses Eksklusif Admin</strong>
+                        <p>Hanya Anda yang dapat menambahkan dan mengelola produk di toko ini.</p>
+                    </div>
+                </div>
+                
+                <h3 style="margin-bottom: 1.5rem; color: var(--primary);">
+                    <i class="fas fa-plus-circle"></i> Tambah Produk Baru
+                </h3>
+                
+                <form id="product-form">
+                    <div class="form-group">
+                        <label for="product-name">Nama Produk</label>
+                        <input type="text" id="product-name" placeholder="Contoh: Sepatu Sport Premium" required disabled>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="product-category">Kategori Produk</label>
+                        <select id="product-category" disabled>
+                            <option value="fashion">Fashion</option>
+                            <option value="elektronik">Elektronik</option>
+                            <option value="olahraga">Olahraga</option>
+                            <option value="aksesoris">Aksesoris</option>
+                            <option value="kesehatan">Kesehatan & Kecantikan</option>
+                            <option value="rumah">Rumah Tangga</option>
+                            <option value="lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="product-description">Deskripsi Produk</label>
+                        <textarea id="product-description" placeholder="Jelaskan produk secara detail..." required disabled></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="product-price">Harga (Rp)</label>
+                        <input type="number" id="product-price" placeholder="Contoh: 299000" min="0" required disabled>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="product-stock">Stok Tersedia</label>
+                        <input type="number" id="product-stock" placeholder="Contoh: 10" min="0" required disabled>
+                        <div class="form-note">Masukkan 0 jika produk habis</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="product-image">URL Gambar Produk</label>
+                        <input type="url" id="product-image" placeholder="https://example.com/gambar-produk.jpg" disabled>
+                        <div class="form-note">Biarkan kosong untuk menggunakan gambar default</div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" id="submit-product-btn" style="width: 100%;" disabled>
+                        <i class="fas fa-plus"></i> Tambah Produk ke Katalog
+                    </button>
+                </form>
+            </section>
+            
+            <!-- Products Section -->
+            <section class="products-section">
+                <div class="section-header">
+                    <div>
+                        <h2><i class="fas fa-box-open"></i> Katalog Produk</h2>
+                        <p style="color: #7f8c8d; margin-top: 5px;">Semua tamu dapat melihat produk di bawah ini</p>
+                    </div>
+                    <div class="products-count" id="products-count">0 Produk</div>
+                </div>
+                
+                <div id="products-container" class="products-grid">
+                    <!-- Produk akan ditampilkan di sini -->
+                    <div class="empty-state">
+                        <i class="fas fa-box-open"></i>
+                        <h3 style="color: #7f8c8d; margin-bottom: 10px;">Belum Ada Produk</h3>
+                        <p>Admin silakan login untuk menambahkan produk pertama.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">RTM GORIORIO</div>
+                <p>Toko online eksklusif dengan produk berkualitas tinggi</p>
+                
+                <div class="footer-links">
+                    <a href="#"><i class="fas fa-home"></i> Beranda</a>
+                    <a href="#"><i class="fas fa-shopping-bag"></i> Produk</a>
+                    <a href="#"><i class="fas fa-info-circle"></i> Tentang Kami</a>
+                    <a href="#"><i class="fas fa-envelope"></i> Kontak</a>
+                </div>
+                
+                <div class="copyright">
+                    &copy; 2023 RTM GORIORIO. Hak Cipta Dilindungi.<br>
+                    Hanya admin yang dapat mengupload produk. Tamu dapat melihat katalog produk.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fas fa-lock"></i>
+                <h2>Login Admin RTM GORIORIO</h2>
+            </div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="username">Username Admin</label>
+                    <input type="text" id="username" placeholder="Masukkan username admin" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password Admin</label>
+                    <input type="password" id="password" placeholder="Masukkan password admin" required>
+                </div>
+                
+                <div class="form-group">
+                    <p style="font-size: 0.9rem; color: #7f8c8d; margin-bottom: 1.5rem;">
+                        <i class="fas fa-info-circle"></i> Hanya pemilik toko RTM GORIORIO yang memiliki akses login.
+                    </p>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-sign-in-alt"></i> Masuk Sebagai Admin
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notification-text">Notification text</span>
+    </div>
+
+    <script>
+        // Data produk disimpan di localStorage
+        let products = JSON.parse(localStorage.getItem('rtm_goriorio_products')) || [];
+        
+        // Kredensial admin (bisa diubah sesuai keinginan)
+        const ADMIN_CREDENTIALS = {
+            username: "admin_rtm",
+            password: "goriorio123"
+        };
+        
+        // Status login admin
+        let isAdminLoggedIn = localStorage.getItem('rtm_admin_logged_in') === 'true';
+        
+        // Elemen DOM
+        const loginModal = document.getElementById('login-modal');
+        const loginBtn = document.getElementById('login-btn');
+        const logoutBtn = document.getElementById('logout-btn');
+        const userStatusText = document.getElementById('user-status-text');
+        const guestMessage = document.getElementById('guest-message');
+        const adminMessage = document.getElementById('admin-message');
+        const adminPanel = document.getElementById('admin-panel');
+        const productForm = document.getElementById('product-form');
+        const submitProductBtn = document.getElementById('submit-product-btn');
+        const productsContainer = document.getElementById('products-container');
+        const productsCount = document.getElementById('products-count');
+        const notification = document.getElementById('notification');
+        const notificationText = document.getElementById('notification-text');
+        
+        // Gambar default untuk produk
+        const defaultImages = [
+            'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+            'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+            'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+            'https://images.unsplash.com/photo-1491553895911-0055eca6402d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+            'https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+        ];
+        
+        // Ikon untuk kategori
+        const categoryIcons = {
+            fashion: "fas fa-tshirt",
+            elektronik: "fas fa-laptop",
+            olahraga: "fas fa-dumbbell",
+            aksesoris: "fas fa-gem",
+            kesehatan: "fas fa-heartbeat",
+            rumah: "fas fa-home",
+            lainnya: "fas fa-box"
+        };
+        
+        // Nama kategori yang lebih user-friendly
+        const categoryNames = {
+            fashion: "Fashion",
+            elektronik: "Elektronik",
+            olahraga: "Olahraga",
+            aksesoris: "Aksesoris",
+            kesehatan: "Kesehatan & Kecantikan",
+            rumah: "Rumah Tangga",
+            lainnya: "Lainnya"
+        };
+        
+        // Format harga ke Rupiah
+        function formatRupiah(price) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(price);
+        }
+        
+        // Tampilkan notifikasi
+        function showNotification(message, isSuccess = true) {
+            notificationText.textContent = message;
+            notification.className = 'notification';
+            notification.classList.add('show');
+            
+            if (!isSuccess) {
+                notification.classList.add('error');
+                notification.querySelector('i').className = 'fas fa-exclamation-circle';
+            } else {
+                notification.querySelector('i').className = 'fas fa-check-circle';
+            }
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Update UI berdasarkan status login
+        function updateLoginUI() {
+            if (isAdminLoggedIn) {
+                // Admin login
+                userStatusText.textContent = "Admin RTM GORIORIO";
+                loginBtn.style.display = 'none';
+                logoutBtn.style.display = 'inline-flex';
+                guestMessage.style.display = 'none';
+                adminMessage.style.display = 'block';
+                
+                // Aktifkan panel admin
+                adminPanel.classList.remove('disabled');
+                const formInputs = productForm.querySelectorAll('input, textarea, select, button');
+                formInputs.forEach(input => {
+                    input.disabled = false;
+                });
+                
+                showNotification("Selamat datang, Admin RTM GORIORIO!", true);
+            } else {
+                // Tamu
+                userStatusText.textContent = "Tamu";
+                loginBtn.style.display = 'inline-flex';
+                logoutBtn.style.display = 'none';
+                guestMessage.style.display = 'block';
+                adminMessage.style.display = 'none';
+                
+                // Nonaktifkan panel admin
+                adminPanel.classList.add('disabled');
+                const formInputs = productForm.querySelectorAll('input, textarea, select, button');
+                formInputs.forEach(input => {
+                    input.disabled = true;
+                });
+            }
+            
+            // Tampilkan produk
+            displayProducts();
+        }
+        
+        // Tampilkan produk
+        function displayProducts() {
+            productsContainer.innerHTML = '';
+            productsCount.textContent = `${products.length} Produk`;
+            
+            if (products.length === 0) {
+                productsContainer.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-box-open"></i>
+                        <h3 style="color: #7f8c8d; margin-bottom: 10px;">Belum Ada Produk</h3>
+                        <p>${isAdminLoggedIn ? 'Tambahkan produk pertama Anda!' : 'Admin silakan login untuk menambahkan produk.'}</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            products.forEach((product, index) => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                
+                // Pilih gambar default jika tidak ada gambar
+                const productImage = product.image || defaultImages[index % defaultImages.length];
+                
+                // Tentukan kelas dan teks untuk stok
+                let stockClass, stockText, stockIcon;
+                if (product.stock > 10) {
+                    stockClass = 'stock-high';
+                    stockText = `${product.stock} tersedia`;
+                    stockIcon = 'fas fa-check';
+                } else if (product.stock > 0) {
+                    stockClass = 'stock-low';
+                    stockText = `${product.stock} tersisa`;
+                    stockIcon = 'fas fa-exclamation';
+                } else {
+                    stockClass = 'stock-none';
+                    stockText = 'Habis';
+                    stockIcon = 'fas fa-times';
+                }
+                
+                // Ikon kategori
+                const categoryIcon = categoryIcons[product.category] || 'fas fa-box';
+                const categoryName = categoryNames[product.category] || 'Lainnya';
+                
+                // Kontrol admin jika login
+                const adminControls = isAdminLoggedIn ? `
+                    <div class="admin-controls">
+                        <button class="btn btn-danger btn-small" onclick="deleteProduct(${index})">
+                            <i class="fas fa-trash"></i> Hapus
+                        </button>
+                    </div>
+                ` : '';
+                
+                productCard.innerHTML = `
+                    <img src="${productImage}" alt="${product.name}" class="product-image">
+                    <div class="product-info">
+                        <div class="product-header">
+                            <h3 class="product-name">${product.name}</h3>
+                            <span class="product-category">
+                                <i class="${categoryIcon}"></i> ${categoryName}
+                            </span>
+                        </div>
+                        <p class="product-description">${product.description}</p>
+                        <div class="product-price">${formatRupiah(product.price)}</div>
+                        <div class="product-stock ${stockClass}">
+                            <i class="${stockIcon}"></i> ${stockText}
+                        </div>
+                        ${adminControls}
+                        <div class="product-footer">
+                            <span><i class="far fa-calendar"></i> ${product.date}</span>
+                            <span><i class="fas fa-store"></i> RTM GORIORIO</span>
+                        </div>
+                    </div>
+                `;
+                
+                productsContainer.appendChild(productCard);
+            });
+        }
+        
+        // Hapus produk (hanya admin)
+        function deleteProduct(index) {
+            if (!isAdminLoggedIn) {
+                showNotification('Anda harus login sebagai admin untuk menghapus produk!', false);
+                return;
+            }
+            
+            if (confirm('Apakah Anda yakin ingin menghapus produk ini?')) {
+                const productName = products[index].name;
+                products.splice(index, 1);
+                localStorage.setItem('rtm_goriorio_products', JSON.stringify(products));
+                displayProducts();
+                showNotification(`Produk "${productName}" berhasil dihapus!`, true);
+            }
+        }
+        
+        // Event Listeners
+        // Login button
+        loginBtn.addEventListener('click', function() {
+            loginModal.style.display = 'flex';
+        });
+        
+        // Logout button
+        logoutBtn.addEventListener('click', function() {
+            isAdminLoggedIn = false;
+            localStorage.removeItem('rtm_admin_logged_in');
+            updateLoginUI();
+            showNotification('Anda telah logout dari panel admin.', true);
+        });
+        
+        // Login form
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+                isAdminLoggedIn = true;
+                localStorage.setItem('rtm_admin_logged_in', 'true');
+                loginModal.style.display = 'none';
+                updateLoginUI();
+                document.getElementById('login-form').reset();
+            } else {
+                showNotification('Username atau password salah!', false);
+            }
+        });
+        
+        // Close modal when clicking outside
+        loginModal.addEventListener('click', function(e) {
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+                document.getElementById('login-form').reset();
+            }
+        });
+        
+        // Product form
+        productForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!isAdminLoggedIn) {
+                showNotification('Anda harus login sebagai admin untuk menambahkan produk!', false);
+                return;
+            }
+            
+            const productName = document.getElementById('product-name').value.trim();
+            const productCategory = document.getElementById('product-category').value;
+            const productDescription = document.getElementById('product-description').value.trim();
+            const productPrice = parseInt(document.getElementById('product-price').value);
+            const productStock = parseInt(document.getElementById('product-stock').value);
+            const productImage = document.getElementById('product-image').value.trim();
+            
+            // Validasi input
+            if (!productName || !productDescription || !productPrice || productStock < 0) {
+                showNotification('Harap isi semua field dengan benar!', false);
+                return;
+            }
+            
+            if (productPrice < 100) {
+                showNotification('Harga produk minimal Rp 100!', false);
+                return;
+            }
+            
+            // Tanggal saat ini
+            const now = new Date();
+            const formattedDate = now.toLocaleDateString('id-ID', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+            
+            // Buat objek produk
+            const newProduct = {
+                id: Date.now(),
+                name: productName,
+                category: productCategory,
+                description: productDescription,
+                price: productPrice,
+                stock: productStock,
+                image: productImage,
+                date: formattedDate,
+                addedBy: 'Admin RTM GORIORIO'
+            };
+            
+            // Tambahkan ke array
+            products.unshift(newProduct);
+            
+            // Simpan ke localStorage
+            localStorage.setItem('rtm_goriorio_products', JSON.stringify(products));
+            
+            // Reset form
+            productForm.reset();
+            
+            // Tampilkan produk
+            displayProducts();
+            
+            // Notifikasi
+            showNotification(`Produk "${productName}" berhasil ditambahkan ke katalog!`, true);
+        });
+        
+        // Inisialisasi saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', function() {
+            updateLoginUI();
+            
+            // Tambahkan beberapa produk contoh jika belum ada
+            if (products.length === 0) {
+                const sampleProducts = [
+                    {
+                        id: 1,
+                        name: "Sepatu Running Premium",
+                        category: "olahraga",
+                        description: "Sepatu lari dengan teknologi terbaru untuk kenyamanan maksimal. Cocok untuk semua jenis lari.",
+                        price: 450000,
+                        stock: 12,
+                        image: "",
+                        date: "10 November 2023",
+                        addedBy: "Admin RTM GORIORIO"
+                    },
+                    {
+                        id: 2,
+                        name: "Smart Watch Series 5",
+                        category: "elektronik",
+                        description: "Jam tangan pintar dengan fitur kesehatan, GPS, dan baterai tahan hingga 7 hari.",
+                        price: 1250000,
+                        stock: 5,
+                        image: "",
+                        date: "8 November 2023",
+                        addedBy: "Admin RTM GORIORIO"
+                    },
+                    {
+                        id: 3,
+                        name: "Tas Ransel Fashion",
+                        category: "fashion",
+                        description: "Tas ransel stylish dengan bahan waterproof, banyak kompartemen, dan desain ergonomis.",
+                        price: 289000,
+                        stock: 3,
+                        image: "",
+                        date: "5 November 2023",
+                        addedBy: "Admin RTM GORIORIO"
+                    },
+                    {
+                        id: 4,
+                        name: "Blender Multifungsi",
+                        category: "rumah",
+                        description: "Blender dengan 7 kecepatan, kapasitas 2L, dan pisau stainless steel tahan karat.",
+                        price: 650000,
+                        stock: 8,
+                        image: "",
+                        date: "1 November 2023",
+                        addedBy: "Admin RTM GORIORIO"
+                    }
+                ];
+                
+                products = sampleProducts;
+                localStorage.setItem('rtm_goriorio_products', JSON.stringify(products));
+                displayProducts();
+            }
+            
+            // Tampilkan pesan selamat datang untuk tamu
+            if (!isAdminLoggedIn) {
+                showNotification("Selamat datang di RTM GORIORIO! Anda login sebagai tamu.", true);
+            }
+        });
+    </script>
+</body>
+</html>
